@@ -1,6 +1,5 @@
 import re
 import csv
-import sklearn
 import numpy as np
 import aspect_based_sentiment_analysis as absa
 
@@ -47,6 +46,15 @@ def classify_sentiment(scores):
     return pred_label
 
 
+def compute_accuracy(preds, labels):
+    preds = np.array(preds)
+    labels = np.array(labels)
+    correct = np.sum(preds == labels)
+    total = len(labels)
+    acc = correct / total
+    return acc
+
+
 def main():
     csv_path = 'data/target_test_tweets.csv'
     tweets_targets, labels = load_csv(csv_path)
@@ -60,8 +68,8 @@ def main():
         preds.append(classify_sentiment(scores))
         count += 1
         if count % 1000:
-            print(count, 'examples done')
-    acc = sklearn.metrics.accuracy_score(labels, preds)
+            print('Example', count, 'processed')
+    acc = compute_accuracy(preds, labels)
     print('Accuracy:', acc)
 
 
