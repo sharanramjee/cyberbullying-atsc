@@ -1,25 +1,6 @@
-import re
-import csv
 import numpy as np
+from utils import load_csv, compute_accuracy
 import aspect_based_sentiment_analysis as absa
-
-
-def get_targets(tweet):
-    handle_pattern = r'@(\w+)(?=[\s|:])'
-    handles = re.findall(handle_pattern, tweet)
-    return handles
-
-
-def load_csv(filename):
-    with open(filename, encoding='utf-8') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        _ = next(csv_reader)   # CSV header
-        tweets_targets = list()
-        labels = list()
-        for row in csv_reader:
-            tweets_targets.append([row[0], get_targets(row[0])])
-            labels.append(row[3])
-        return tweets_targets, labels
 
 
 def load_bert():
@@ -46,24 +27,15 @@ def classify_sentiment(scores):
     return pred_label
 
 
-def compute_accuracy(preds, labels):
-    preds = np.array(preds)
-    labels = np.array(labels)
-    correct = np.sum(preds == labels)
-    total = len(labels)
-    acc = correct / total
-    return acc
-
-
 def main():
     csv_path = 'data/target_test_tweets.csv'
-    tweets_targets, labels = load_csv(csv_path)
+    tweets, targets, labels = load_csv(csv_path)
     print('--- LOADED CSV ---')
     model = load_bert()
     print('--- LOADED MODEL ---')
     preds = list()
     count = 0
-    for tweet, targets in tweets_targets:
+    for tweet, targets in zip(tweets, targets):
         scores = score_sentiment(model, tweet, targets)
         preds.append(classify_sentiment(scores))
         count += 1
