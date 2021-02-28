@@ -19,7 +19,7 @@ def load_csv(filename):
         for row in csv_reader:
             tweets.append(row[0])
             targets.append(get_targets(row[0]))
-            labels.append(row[3])
+            labels.append(int(row[3]))
         return tweets, targets, labels
 
 

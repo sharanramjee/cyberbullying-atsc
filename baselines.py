@@ -50,28 +50,31 @@ def main():
     tweets, _, labels = load_csv(csv_path)
 
     bert_base = load_bert_base()
-    print('BERT BASE loaded.')
+    print('BERT BASE loaded')
     preds = classify_sentiment(bert_base, tweets)
-    print('Inference complete.')
     acc = compute_accuracy(preds, labels)
     print('BERT BASE Accuracy:', acc)
 
     distilbert = load_distilbert()
+    print('DistilBERT loaded')
     preds = classify_sentiment(distilbert, tweets)
     acc = compute_accuracy(preds, labels)
     print('DistilBERT Accuracy:', acc)
 
     roberta_base = load_roberta_base()
     preds = classify_sentiment(roberta_base, tweets)
+    print('RoBERTa loaded')
     acc = compute_accuracy(preds, labels)
     print('RoBERTa BASE Accuracy:', acc)
 
     bertweet = load_bertweet()
+    print('BERTweet loaded')
     preds = classify_sentiment(bertweet, tweets)
     acc = compute_accuracy(preds, labels)
     print('BERTweet Accuracy:', acc)
 
     t5_base = load_t5_base()
+    print('T5 BASE loaded')
     preds = classify_sentiment(t5_base, tweets)
     acc = compute_accuracy(preds, labels)
     print('T5 BASE Accuracy:', acc)
