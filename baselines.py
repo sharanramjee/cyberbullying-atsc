@@ -41,8 +41,19 @@ def classify_sentiment(model, tweets):
     #     else:
     #         preds.append(0)
     #     print('Example', ex_idx, 'processed')
-    outputs = model(tweets)
-    preds = [1 if output['score'] >= 0.5 else 0 for output in outputs]
+    n_threads = 10
+    n_tweets = len(tweets) // n_threads
+    tweet_chunks = [tweets[x:x+n_tweets] for x in range(0, len(tweets), n_tweets)]
+    chunks_len = 0
+    for chunk in tweet_chunks:
+        chunks_len += len(chunk)
+    assert chunks_len == len(tweets)
+    preds = list()
+    for chunk in tweet_chunks:
+        chunk_out = model(chunk)
+        chunk_preds = [1 if out['score'] >= 0.5 else 0 for out in chunk_out]
+        preds += chunk_preds
+    # preds = [1 if output['score'] >= 0.5 else 0 for output in outputs]
     return preds
 
 
