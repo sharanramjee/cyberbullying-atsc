@@ -33,16 +33,16 @@ def load_t5_base():
 
 
 def classify_sentiment(model, tweets):
-    preds = list()
-    for ex_idx, tweet in enumerate(tweets):
-        output = model(tweet)[0]
-        if output['score'] >= 0.5:
-            preds.append(1)
-        else:
-            preds.append(0)
-        print('Example', ex_idx, 'processed')
-    # outputs = model(tweets)
-    # preds = [1 if output['label'] == 'POSITIVE' else 0 for output in outputs]
+    # preds = list()
+    # for ex_idx, tweet in enumerate(tweets):
+    #     output = model(tweet)[0]
+    #     if output['score'] >= 0.5:
+    #         preds.append(1)
+    #     else:
+    #         preds.append(0)
+    #     print('Example', ex_idx, 'processed')
+    outputs = model(tweets)
+    preds = [1 if output['score'] >= 0.5 else 0 for output in outputs]
     return preds
 
 
