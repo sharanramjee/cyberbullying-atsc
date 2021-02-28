@@ -4,7 +4,7 @@ from utils import load_csv, compute_accuracy
 
 def load_bert_base():
     model = pipeline('sentiment-analysis',
-                     model='nlptown/bert-base-multilingual-uncased-sentiment')
+                     model='textattack/bert-base-uncased-SST-2')
     return model
 
 
@@ -13,7 +13,7 @@ def load_distilbert():
     return model
 
 
-def load_roberta_base():
+def load_twitter_roberta_base():
     model = pipeline('sentiment-analysis',
                      model='cardiffnlp/twitter-roberta-base-sentiment')
     return model
@@ -25,22 +25,20 @@ def load_bertweet():
     return model
 
 
-def load_t5_base():
-    model = pipeline(
-        'sentiment-analysis',
-        model='mrm8488/t5-base-finetuned-span-sentiment-extraction')
+def load_minilm():
+    model = pipeline('sentiment-analysis',
+                     model='microsoft/Multilingual-MiniLM-L12-H384')
     return model
 
 
-def classify_sentiment(model, tweets):
+def classify_sentiment(model, tweets, neg_label):
     n_chunks = 10
     chunk_size = len(tweets) // n_chunks
     chunks = [tweets[x:x+chunk_size] for x in range(0, len(tweets), chunk_size)]
     preds = list()
     for chunk_idx, chunk in enumerate(chunks):
         chunk_out = model(chunk)
-        chunk_preds = [1 if out['score'] >= 0.5 else 0 for out in chunk_out]
-        preds += chunk_preds
+        preds += [0 if out['label'] == neg_label else 1 for out in chunk_out]
         print('Chunk', chunk_idx, 'processed')
     return preds
 
@@ -51,33 +49,33 @@ def main():
 
     bert_base = load_bert_base()
     print('BERT BASE loaded')
-    preds = classify_sentiment(bert_base, tweets)
+    preds = classify_sentiment(bert_base, tweets, 'LABEL_0')
     acc = compute_accuracy(preds, labels)
     print('BERT BASE Accuracy:', acc)
 
     distilbert = load_distilbert()
     print('DistilBERT loaded')
-    preds = classify_sentiment(distilbert, tweets)
+    preds = classify_sentiment(distilbert, tweets, 'NEGATIVE')
     acc = compute_accuracy(preds, labels)
     print('DistilBERT Accuracy:', acc)
 
-    roberta_base = load_roberta_base()
-    preds = classify_sentiment(roberta_base, tweets)
-    print('RoBERTa loaded')
+    twitter_roberta_base = load_twitter_roberta_base()
+    preds = classify_sentiment(twitter_roberta_base, tweets, 'LABEL_0')
+    print('Twitter RoBERTa loaded')
     acc = compute_accuracy(preds, labels)
-    print('RoBERTa BASE Accuracy:', acc)
+    print('Twitter RoBERTa BASE Accuracy:', acc)
 
-    bertweet = load_bertweet()
-    print('BERTweet loaded')
-    preds = classify_sentiment(bertweet, tweets)
-    acc = compute_accuracy(preds, labels)
-    print('BERTweet Accuracy:', acc)
-
-    t5_base = load_t5_base()
-    print('T5 BASE loaded')
-    preds = classify_sentiment(t5_base, tweets)
-    acc = compute_accuracy(preds, labels)
-    print('T5 BASE Accuracy:', acc)
+    # bertweet = load_bertweet()
+    # print('BERTweet loaded')
+    # preds = classify_sentiment(bertweet, tweets, 'LABEL_0')
+    # acc = compute_accuracy(preds, labels)
+    # print('BERTweet Accuracy:', acc)
+    #
+    # minilm = load_minilm()
+    # print('MiniLM loaded')
+    # preds = classify_sentiment(minilm, tweets, 'LABEL_0')
+    # acc = compute_accuracy(preds, labels)
+    # print('MiniLM Accuracy:', acc)
 
 
 if __name__ == '__main__':
