@@ -1,5 +1,6 @@
+import numpy as np
 from transformers import pipeline
-from utils import load_csv, compute_accuracy
+from utils import load_csv, compute_accuracy, compute_precision, compute_recall, compute_f1
 
 
 def load_bert_base():
