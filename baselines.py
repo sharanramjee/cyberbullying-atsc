@@ -51,7 +51,9 @@ def main():
     tweets, _, labels = load_csv(csv_path)
 
     bert_base = load_bert_base()
+    print('BERT BASE loaded.')
     preds = classify_sentiment(bert_base, tweets)
+    print('Inference complete.')
     acc = compute_accuracy(preds, labels)
     print('BERT BASE Accuracy:', acc)
 
