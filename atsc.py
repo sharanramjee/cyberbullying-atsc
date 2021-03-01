@@ -9,12 +9,12 @@ def load_bert():
 
 
 def score_sentiment(model, text, targets):
-    # try:
-    output = list(model(text, aspects=targets))
-    scores = [out.scores for out in output]
-    # except:
-    #     print('Skipped')
-    #     scores = [[0, 0, 1]]
+    try:
+        output = list(model(text, aspects=targets))
+        scores = [out.scores for out in output]
+    except:
+        print('Skipped')
+        scores = [[0, 0, 1]]
     return scores
 
 
