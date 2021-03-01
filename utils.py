@@ -23,6 +23,10 @@ def load_csv(filename):
         return tweets, targets, labels
 
 
+def save_npy(arr, name, dir_name='preds/'):
+    np.save(dir_name + name + '.npy', arr)
+
+
 def load_npy(filename):
     arr = np.load(filename)
     return arr

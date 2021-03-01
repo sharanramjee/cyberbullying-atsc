@@ -1,35 +1,40 @@
 import numpy as np
 from transformers import pipeline
-from utils import load_csv, print_metrics
+from utils import load_csv, save_npy, print_metrics
 
 
 def load_bert_base():
+    name = 'bert_base'
     model = pipeline('sentiment-analysis',
                      model='textattack/bert-base-uncased-SST-2')
-    return model
+    return model, name
 
 
 def load_distilbert():
+    name = 'distilbert'
     model = pipeline('sentiment-analysis')   # DistilBERT is the default
-    return model
+    return model, name
 
 
 def load_twitter_roberta_base():
+    name = 'twitter_roberta_base'
     model = pipeline('sentiment-analysis',
                      model='cardiffnlp/twitter-roberta-base-sentiment')
-    return model
+    return model, name
 
 
 def load_bertweet():
+    name = 'bertweet'
     model = pipeline('sentiment-analysis',
                      model='cardiffnlp/bertweet-base-sentiment')
-    return model
+    return model, name
 
 
 def load_minilm():
+    name = 'minilm'
     model = pipeline('sentiment-analysis',
                      model='microsoft/Multilingual-MiniLM-L12-H384')
-    return model
+    return model, name
 
 
 def classify_sentiment(model, tweets, neg_label, name):
@@ -41,8 +46,7 @@ def classify_sentiment(model, tweets, neg_label, name):
         chunk_out = model(chunk)
         preds += [0 if out['label'] == neg_label else 1 for out in chunk_out]
         print('Chunk', chunk_idx, 'processed')
-    with open(name + '.npy', 'wb') as npy_file:
-        np.save(npy_file, preds)
+    save_npy(preds, name, 'preds/')
     return preds
 
 
@@ -50,27 +54,26 @@ def main():
     csv_path = 'data/target_test_tweets.csv'
     tweets, _, labels = load_csv(csv_path)
 
-    bert_base = load_bert_base()
-    print('bert_base loaded')
-    preds = classify_sentiment(bert_base, tweets, 'LABEL_0', 'bert_base')
-    print_metrics(preds, labels, 'bert_base')
+    bert_base, name = load_bert_base()
+    print(name, 'loaded')
+    preds = classify_sentiment(bert_base, tweets, 'LABEL_0', name)
+    print_metrics(preds, labels, name)
 
-    distilbert = load_distilbert()
-    print('distilbert loaded')
-    preds = classify_sentiment(distilbert, tweets, 'NEGATIVE', 'distilbert')
-    print_metrics(preds, labels, 'distilbert')
+    distilbert, name = load_distilbert()
+    print(name, 'loaded')
+    preds = classify_sentiment(distilbert, tweets, 'NEGATIVE', name)
+    print_metrics(preds, labels, name)
 
-    twitter_roberta_base = load_twitter_roberta_base()
-    print('twitter_roberta_base loaded')
-    preds = classify_sentiment(twitter_roberta_base, tweets, 'LABEL_0', 'twitter_roberta_base')
-    print_metrics(preds, labels, 'twitter_roberta_base')
+    twitter_roberta_base, name = load_twitter_roberta_base()
+    print(name, 'loaded')
+    preds = classify_sentiment(twitter_roberta_base, tweets, 'LABEL_0', name)
+    print_metrics(preds, labels, name)
 
-    # bertweet = load_bertweet()
-    # print('BERTweet loaded')
-    # preds = classify_sentiment(bertweet, tweets, 'LABEL_0')
-    # acc = compute_accuracy(preds, labels)
-    # print('BERTweet Accuracy:', acc)
-    #
+    bertweet, name = load_bertweet()
+    print(name, 'loaded')
+    preds = classify_sentiment(bertweet, tweets, 'LABEL_0', name)
+    print_metrics(preds, labels, name)
+    
     # minilm = load_minilm()
     # print('MiniLM loaded')
     # preds = classify_sentiment(minilm, tweets, 'LABEL_0')
