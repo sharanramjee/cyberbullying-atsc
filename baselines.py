@@ -1,4 +1,3 @@
-import numpy as np
 from transformers import pipeline
 from utils import load_csv, save_npy, print_metrics
 
@@ -73,7 +72,7 @@ def main():
     print(name, 'loaded')
     preds = classify_sentiment(bertweet, tweets, 'LABEL_0', name)
     print_metrics(preds, labels, name)
-    
+
     # minilm = load_minilm()
     # print('MiniLM loaded')
     # preds = classify_sentiment(minilm, tweets, 'LABEL_0')

@@ -1,5 +1,5 @@
 import numpy as np
-from utils import load_csv, compute_accuracy
+from utils import load_csv, save_npy, print_metrics
 import aspect_based_sentiment_analysis as absa
 
 
@@ -27,22 +27,15 @@ def classify_sentiment(scores):
     return pred_label
 
 
-def main():
-    csv_path = 'data/target_test_tweets.csv'
-    tweets, targets, labels = load_csv(csv_path)
-    print('--- LOADED CSV ---')
-    model = load_bert()
-    print('--- LOADED MODEL ---')
-    preds = list()
+def predict(model, tweets, targets):
     count = 0
-    for tweet, targets in zip(tweets, targets):
+    preds = list()
+    for tweet, target in zip(tweets, targets):
         scores = score_sentiment(model, tweet, targets)
         preds.append(classify_sentiment(scores))
         count += 1
-        if count % 1000:
-            print('Example', count, 'processed')
-    acc = compute_accuracy(preds, labels)
-    print('Accuracy:', acc)
+        print('Example', count, 'processed')
+    return preds
 
 
 def demo():
@@ -52,6 +45,18 @@ def demo():
     absa_scores = score_sentiment(absa_model, absa_text, absa_aspects)
     absa_labels = classify_sentiment(absa_scores)
     print(absa_labels)
+
+
+def main():
+    csv_path = 'data/target_test_tweets.csv'
+    tweets, targets, labels = load_csv(csv_path)
+    print('--- LOADED CSV ---')
+    model = load_bert()
+    print('--- LOADED MODEL ---')
+    preds = predict(model, tweets, targets)
+    save_npy(preds, 'ada_bert', 'preds/')
+    print('--- SAVED PREDS ---')
+    print_metrics(preds, labels, 'ada_bert')
 
 
 if __name__ == '__main__':
