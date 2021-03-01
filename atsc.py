@@ -9,12 +9,12 @@ def load_bert():
 
 
 def score_sentiment(model, text, targets):
-    try:
-        output = list(model(text, aspects=targets))
-        scores = [out.scores for out in output]
-    except:
-        print('Skipped')
-        scores = [[0, 0, 1]]
+    # try:
+    output = list(model(text, aspects=targets))
+    scores = [out.scores for out in output]
+    # except:
+    #     print('Skipped')
+    #     scores = [[0, 0, 1]]
     return scores
 
 
@@ -31,7 +31,7 @@ def predict(model, tweets, targets):
     count = 0
     preds = list()
     for tweet, target in zip(tweets, targets):
-        scores = score_sentiment(model, tweet, targets)
+        scores = score_sentiment(model, tweet, target)
         preds.append(classify_sentiment(scores))
         count += 1
         print('Example', count, 'processed')
