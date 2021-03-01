@@ -1,6 +1,6 @@
 import numpy as np
 from transformers import pipeline
-from utils import load_csv, compute_accuracy, compute_precision, compute_recall, compute_f1
+from utils import load_csv, print_metrics
 
 
 def load_bert_base():
@@ -41,8 +41,8 @@ def classify_sentiment(model, tweets, neg_label, name):
         chunk_out = model(chunk)
         preds += [0 if out['label'] == neg_label else 1 for out in chunk_out]
         print('Chunk', chunk_idx, 'processed')
-    with open(name + '.npy', 'wb') as out:
-        np.save(out, preds)
+    with open(name + '.npy', 'wb') as npy_file:
+        np.save(npy_file, preds)
     return preds
 
 
@@ -51,40 +51,19 @@ def main():
     tweets, _, labels = load_csv(csv_path)
 
     bert_base = load_bert_base()
-    print('BERT BASE loaded')
+    print('bert_base loaded')
     preds = classify_sentiment(bert_base, tweets, 'LABEL_0', 'bert_base')
-    acc = compute_accuracy(preds, labels)
-    print('BERT BASE Accuracy:', acc)
-    prec = compute_precision(preds, labels)
-    print('BERT BASE Precision:', prec)
-    rec = compute_recall(preds, labels)
-    print('BERT BASE Recall:', rec)
-    f1 = compute_f1(preds, labels)
-    print('BERT BASE F1:', f1)
+    print_metrics(preds, labels, 'bert_base')
 
     distilbert = load_distilbert()
-    print('DistilBERT loaded')
+    print('distilbert loaded')
     preds = classify_sentiment(distilbert, tweets, 'NEGATIVE', 'distilbert')
-    acc = compute_accuracy(preds, labels)
-    print('DistilBERT Accuracy:', acc)
-    prec = compute_precision(preds, labels)
-    print('DistilBERT Precision:', prec)
-    rec = compute_recall(preds, labels)
-    print('DistilBERT Recall:', rec)
-    f1 = compute_f1(preds, labels)
-    print('DistilBERT F1:', f1)
+    print_metrics(preds, labels, 'distilbert')
 
     twitter_roberta_base = load_twitter_roberta_base()
+    print('twitter_roberta_base loaded')
     preds = classify_sentiment(twitter_roberta_base, tweets, 'LABEL_0', 'twitter_roberta_base')
-    print('Twitter RoBERTa loaded')
-    acc = compute_accuracy(preds, labels)
-    print('Twitter RoBERTa BASE Accuracy:', acc)
-    prec = compute_precision(preds, labels)
-    print('Twitter RoBERTa Precision:', prec)
-    rec = compute_recall(preds, labels)
-    print('Twitter RoBERTa Recall:', rec)
-    f1 = compute_f1(preds, labels)
-    print('Twitter RoBERTa F1:', f1)
+    print_metrics(preds, labels, 'twitter_roberta_base')
 
     # bertweet = load_bertweet()
     # print('BERTweet loaded')
