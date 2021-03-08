@@ -54,6 +54,22 @@ def load_csv(filename):
         return tweets, targets, labels
 
 
+def combine_csv(csv1, csv2, out_csv):
+    with open(out_csv, 'w', newline='', encoding='utf-8') as out_csv_file:
+        csv_writer = csv.writer(out_csv_file)
+        with open(csv1, encoding='utf-8') as csv1_file:
+            csv1_reader = csv.reader(csv1_file, delimiter=',')
+            header = next(csv1_reader)  # CSV header
+            csv_writer.writerow(header)
+            for row in csv1_reader:
+                csv_writer.writerow(row)
+        with open(csv2, encoding='utf-8') as csv2_file:
+            csv2_reader = csv.reader(csv2_file, delimiter=',')
+            _ = next(csv2_reader)  # CSV header
+            for row in csv2_reader:
+                csv_writer.writerow(row)
+
+
 def save_npy(arr, name, dir_name='preds/'):
     np.save(dir_name + name + '.npy', arr)
 
@@ -106,6 +122,7 @@ def print_metrics(preds, labels, name):
 
 
 if __name__ == '__main__':
-    in_csv_path = 'data/no_target_test_clean.csv'
-    out_csv_path = 'ner_no_target_test_clean.csv'
-    create_target_csv(in_csv_path, out_csv_path)
+    csv_one = 'data/no_target_test_clean.csv'
+    csv_two = 'data/ner_no_target_test_clean.csv'
+    combined_csv = 'data/all_test_clean.csv'
+    combine_csv(csv_one, csv_two, combined_csv)
