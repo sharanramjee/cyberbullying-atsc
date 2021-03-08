@@ -1,6 +1,7 @@
 import re
 import csv
 import numpy as np
+from sklearn.metrics import precision_score, recall_score
 from ner import load_ner_model, get_ner_targets
 
 
@@ -89,19 +90,21 @@ def compute_accuracy(preds, labels):
 
 
 def compute_precision(preds, labels):
-    preds = np.array(preds)
-    labels = np.array(labels)
-    tp = np.sum((preds == 1) * (labels == 1))
-    fp = np.sum((preds == 1) * (labels == 0))
-    return tp / (tp + fp)
+    # preds = np.array(preds)
+    # labels = np.array(labels)
+    # tp = np.sum((preds == 1) * (labels == 1))
+    # fp = np.sum((preds == 1) * (labels == 0))
+    # return tp / (tp + fp)
+    return precision_score(labels, preds)
 
 
 def compute_recall(preds, labels):
-    preds = np.array(preds)
-    labels = np.array(labels)
-    tp = np.sum((preds == 1) * (labels == 1))
-    fn = np.sum((preds == 0) * (labels == 1))
-    return tp / (tp + fn)
+    # preds = np.array(preds)
+    # labels = np.array(labels)
+    # tp = np.sum((preds == 1) * (labels == 1))
+    # fn = np.sum((preds == 0) * (labels == 1))
+    # return tp / (tp + fn)
+    return recall_score(labels, preds)
 
 
 def compute_f1(preds, labels):
