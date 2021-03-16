@@ -124,8 +124,8 @@ def print_metrics(preds, labels, name):
     print(name, 'F1:', f1)
 
 
-if __name__ == '__main__':
-    csv_one = 'data/ner_no_target_test_clean.csv'
-    csv_two = 'data/target_test_clean.csv'
-    combined_csv = 'data/all_test_clean.csv'
-    combine_csv(csv_one, csv_two, combined_csv)
+# if __name__ == '__main__':
+#     csv_one = 'data/ner_no_target_test_clean.csv'
+#     csv_two = 'data/target_test_clean.csv'
+#     combined_csv = 'data/all_test_clean.csv'
+#     combine_csv(csv_one, csv_two, combined_csv)

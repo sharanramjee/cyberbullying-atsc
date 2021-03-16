@@ -1,0 +1,122 @@
+<sentences>
+ <sentence id="22">
+    <text>#BREAKING: @Trump: Syrian gas attacks "crossed many, many lines beyond the red line"</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Trump" to="0" />
+    </aspectTerms>
+  </sentence>
+<sentence id="46">
+    <text>Definitely an unpopular opinion... but @RickAndMorty sucks you couldn't pay me to watch another... they say each others names way too much</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="RickAndMorty" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="71">
+    <text>Damn @Kobe was mad as hell</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Kobe" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="112">
+    <text>Sheriff @DavidClarke on Violent Philly Protests: 'This Stuff Is Disastrous'</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="DavidClarke" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="336">
+    <text>The dominos commercial came on with @Steve from Stranger Things came on and my brother goes "I've always hated dominos pizza" LMAOOO</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Steve" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="419">
+    <text>By:  Pornstar @Jenna @Presley with huge boobs demonstrates her hot body</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Jenna" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="560">
+    <text>@Amber @Heard sues producer for adding sex scenes to movie without her consent</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Amber" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="569">
+    <text>In case you weren't aware but those in the military will conduct the strikes. @P.@S. @Obama didn't actually kill @Osam&#8230;</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Obama" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="570">
+    <text>@Haley: @Assad a 'war criminal' protected by Russia, #Iran #IranOutOfSyria #UN #UNICEF  &#8230;</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Haley" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="612">
+    <text>Malaysia initially mistook slain @Kim @Jong-nam for South Korean - The Globe and Mail</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Kim" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="696">
+    <text>@@Trump is attempting to be bad ass toward North Korea. That's a dangerous posture. @Kim @Jong-@un is as crazy as Trump.&#8230;</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Kim" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="722">
+    <text>Is the Sky commentator trying to correlate Article 50 with the @Lukaku contract talks the dickhead #efc #LIVEVE #MerseysideDerby</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Lukaku" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="748">
+    <text>The people that @Tyra used to go with is fucking embarrassing to me wtf &#8205;</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Tyra" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="789">
+    <text>Whats even more alarming is how Congress stood by passive while @Obama did his dirty deeds to America. It's outrageo&#8230;</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Obama" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="840">
+    <text>No unclean thing can dwell with @@God,1 Ne. 10:21. For I, the Lord God, delight in the chastity of women, @Jacob 2:28.</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Jacob" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="899">
+    <text>'People's Filibuster' turns out in 14 cities to urge that nominee @Neil @Gorsuch be rejected</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Gorsuch" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="931">
+    <text>If the raiders get @Lynch.. i might aswell just buy my superbowl tickets RN even if @Car breaks both his legs this season.. LYNCH IS A SAVAGE</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Car" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="941">
+    <text>#NCAAF Wire: @Dennis @Rodman goes on profanity-laced rant about @LeBron, @Michael @Jordan and&#8230;</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Dennis" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="968">
+    <text>Advice fr @Kissinger garbagge.CCP is enemy of AMERICAN PPLandcore values."Broadenandimprove relationship" w communist p&#8230;</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="negative" term="Kissinger" to="0" />
+    </aspectTerms>
+  </sentence>
+  <sentence id="989">
+    <text>"@Lexi @Thompson" That is as shitty a call as can be. If the officials don't call it immediately, and there was no intent, then no penalty.</text>
+  <aspectTerms>
+      <aspectTerm from="0" polarity="neutral" term="Lexi" to="0" />
+    </aspectTerms>
+  </sentence>
+</sentences>

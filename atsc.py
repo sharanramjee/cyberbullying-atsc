@@ -48,7 +48,7 @@ def demo():
 
 
 def main():
-    csv_path = 'data/target_test_tweets.csv'
+    csv_path = 'data/all_test_clean.csv'
     tweets, targets, labels = load_csv(csv_path)
     print('--- LOADED CSV ---')
     model = load_bert()
